@@ -1,4 +1,3 @@
-const { describe } = require("yargs");
 const Employee = require("../lib/Employee");
 
 describe('employee class', () => {
@@ -15,7 +14,7 @@ describe('employee class', () => {
     it("should throw an error if not provided with valid inputs", () => {
         const err = new Employee("", "", "");
         expect(() => {
-        if (err.getName() === "" && err.getId() === "" && err.getEmail() === "")
+        if (err.name === "" && err.role === "" && err.id === "" && err.email === "")
             throw new Error("Error - cannot leave blank.");
         }).toThrow("Error - cannot leave blank.");
     });
