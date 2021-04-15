@@ -19,7 +19,7 @@ const askQuestions = async () => {
         {
             type: "list",
             name: "role",
-            choices: ["Manager", "Engineer", "Intern"],
+            choices: ["manager", "engineer", "intern"],
             message: "Which is this employee's role?",
         },
         {
