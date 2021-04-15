@@ -35,51 +35,51 @@ function genDir() {
     </html>
     `
     let bodiesHTML = ""
-    employees.map(function (response) {
-        if (response.role === "manager") {
+    employees.map(function (employee) {
+        if (employee === "Manager") {
             bodiesHTML += `
                 <div class= "col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title"> Name: ${response.name}</h2>
-                            <p class="card-text"> ${response.role}</p>
+                            <h2 class="card-title"> Name: ${employee.name}</h2>
+                            <p class="card-text"> ${employee.role}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ID: ${response.id}</li>
-                            <li class="list-group-item">Email:<a href="mailto:${response.email}" target="_blank">${response.email}</a></li>
-                            <li class="list-group-item">Office Number: ${response.office} </li>
+                            <li class="list-group-item">ID: ${employee.id}</li>
+                            <li class="list-group-item">Email:<a href="mailto:${employee.email}" target="_blank">${employee.email}</a></li>
+                            <li class="list-group-item">Office Number: ${employee.office} </li>
                         </ul>
                     </div>
                 </div>
             `;
-        } else if (response.role === "intern") {
+        } else if (employee === "Intern") {
             bodiesHTML += `
                 <div class= "col-md-4">
                     <div class="card" >
                         <div class="card-body">
-                        <h2 class="card-title">Name:${response.name}</h2>
-                            <p class="card-text"> ${response.role} </p>
+                        <h2 class="card-title">Name:${employee.name}</h2>
+                            <p class="card-text"> ${employee.role} </p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ID: ${response.id}</li>
-                            <li class="list-group-item">Email: <a href="${response.email}" target="_blank">${response.email}</a></li>
-                            <li class="list-group-item">School: ${response.school}</li>
+                            <li class="list-group-item">ID: ${employee.id}</li>
+                            <li class="list-group-item">Email: <a href="${employee.email}" target="_blank">${employee.email}</a></li>
+                            <li class="list-group-item">School: ${employee.school}</li>
                         </ul>
                     </div>
                 </div>
             `;
-        } else if (response.role === "engineer") {
+        } else {
             bodiesHTML += `
                 <div class= "col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title"> Name: ${response.name}</h2>
-                            <p class="card-text"> ${response.role} </p>
+                            <h2 class="card-title"> Name: ${employee.name}</h2>
+                            <p class="card-text"> ${employee.role} </p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ID:  ${response.id}</li>
-                            <li class="list-group-item">Email: <a href="${response.email}">${response.email}</a></li>
-                            <li class="list-group-item">GitHub: <a href="https://github.com/${response.github}" target="_blank">${response.github}</a></li>
+                            <li class="list-group-item">ID:  ${employee.id}</li>
+                            <li class="list-group-item">Email: <a href="${employee.email}">${employee.email}</a></li>
+                            <li class="list-group-item">GitHub: <a href="https://github.com/${employee.github}" target="_blank">${employee.github}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -145,19 +145,16 @@ const askQuestions = async () => {
         inquirer.prompt(questions);
         switch (response.role) {
             case "manager":
-                const newManager = new Manager(response.name, response.id, response.email, response.office)
+                const newManager = new Manager(response.name, response.role, response.id, response.email, response.office)
                 employees.push(newManager);
-                console.log(employees);
                 break;
             case "engineer":
-                const newEngineer = new Engineer(response.name, response.id, response.email, response.github);
+                const newEngineer = new Engineer(response.name, response.role, response.id, response.email, response.github);
                 employees.push(newEngineer);
-                console.log(employees)
                 break;
             case "intern":
-                const newIntern = new Intern(response.name, response.id, response.email, response.school);
+                const newIntern = new Intern(response.name, response.role, response.id, response.email, response.school);
                 employees.push(newIntern);
-                console.log(employees);
                 break;
             default:
                 console.log("generating directory")
@@ -170,7 +167,8 @@ const askQuestions = async () => {
 
 const init = async () => {
     await askQuestions();
-    await genDir(employees);
+    genDir(employees);
+    console.log(employees)
 }
     
 init();
