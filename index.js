@@ -36,7 +36,7 @@ function genDir() {
     `
     let bodiesHTML = ""
     employees.map(function (employee) {
-        if (employee === "Manager") {
+        if (employee.role === "manager") {
             bodiesHTML += `
                 <div class= "col-md-4">
                     <div class="card">
@@ -52,7 +52,7 @@ function genDir() {
                     </div>
                 </div>
             `;
-        } else if (employee === "Intern") {
+        } else if (employee.role === "intern") {
             bodiesHTML += `
                 <div class= "col-md-4">
                     <div class="card" >
