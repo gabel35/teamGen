@@ -118,7 +118,7 @@ const askQuestions = async () => {
         {
             type: "input",
             name: "office",
-            message: "Where is there office? (office number)",
+            message: "Where is their office? (office number)",
             when: (response) => response.role === "manager"
         },
         {
